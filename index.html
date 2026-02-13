@@ -12,124 +12,89 @@
 
         body{
             min-height:100vh;
-            background:linear-gradient(180deg,#ff5f9e,#ffb3c6);
+            background:linear-gradient(-45deg,#ff4e8a,#ff8fb1,#ff5fa2,#ffb3c6,#ff1e7a);
+            background-size:400% 400%;
+            animation:gradientBG 12s ease infinite;
             color:white;
             text-align:center;
             overflow-x:hidden;
         }
 
-        /* BACKGROUND */
-        .bg{position:fixed;inset:0;pointer-events:none;z-index:0;}
-
-        /* FLOATING HEARTS */
-        .bg-heart{
-            position:absolute;
-            bottom:-30px;
-            animation:floatUp 8s linear infinite;
-            opacity:.8;
+        @keyframes gradientBG{
+            0%{background-position:0% 50%;}
+            50%{background-position:100% 50%;}
+            100%{background-position:0% 50%;}
         }
-        @keyframes floatUp{to{transform:translateY(-120vh);}}
 
-        /* 🕊️ PIGEONS */
-        .pigeon{position:absolute;z-index:0;white-space:nowrap;animation-timing-function:linear;}
-        .bird{font-size:42px;display:inline-block;animation:flap .6s infinite alternate;}
-        @keyframes flap{from{transform:scaleX(1);}to{transform:scaleX(-1);}}
-        .letter{position:absolute;top:10px;left:30px;font-size:18px;animation:swing 1.2s infinite alternate;}
-        @keyframes swing{from{transform:rotate(-12deg);}to{transform:rotate(12deg);}}
+        /* Sparkle Trail */
+        .sparkle{
+            position:fixed;
+            pointer-events:none;
+            font-size:14px;
+            animation:sparkleFade .8s linear forwards;
+            z-index:9999;
+        }
+        @keyframes sparkleFade{
+            0%{opacity:1;transform:translateY(0) scale(1);}
+            100%{opacity:0;transform:translateY(-20px) scale(.5);}
+        }
 
-        /* FLY PATHS */
-        .fly-left{top:var(--top);left:-120px;animation-name:flyLeft;}
-        .fly-right{top:var(--top);right:-120px;animation-name:flyRight;}
-        .fly-top{left:var(--left);top:-100px;animation-name:flyTop;}
-        @keyframes flyLeft{to{left:110%;}}
-        @keyframes flyRight{to{right:110%;}}
-        @keyframes flyTop{to{top:110%;}}
-
-        /* CONTAINER */
         .container{
-            position:relative;z-index:1;max-width:420px;margin:auto;
-            min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;
+            position:relative;
+            z-index:1;
+            max-width:450px;
+            margin:auto;
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
         }
 
-        .screen{display:none;width:100%;}
+        .screen{
+            display:none;
+            width:100%;
+            padding:30px 20px;
+            border-radius:25px;
+            background:rgba(255,255,255,0.15);
+            backdrop-filter:blur(18px);
+            border:1px solid rgba(255,255,255,0.3);
+            box-shadow:0 8px 32px rgba(0,0,0,0.2);
+        }
         .screen.active{display:block;}
-        .fade-in{animation:fadeIn 1.3s ease forwards;}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}
 
-        /* TEXT */
         .emoji{font-size:70px;}
-        p{font-size:18px;line-height:1.6;}
+        img{margin-top:15px;width:100%;max-width:260px;border-radius:18px;}
+        #quizImage{display:none;margin:15px auto;}
 
-        /* TITLE */
-        .title-small{color:#6b1f3a;}
-        .title-big{
-            font-family:'Playfair Display',serif;font-size:44px;
-            background:linear-gradient(90deg,#ff1e7a,#ff5fa2,#ff1e7a);
-            background-size:200%;
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-            animation:gradientMove 3s infinite linear;
-        }
-        @keyframes gradientMove{to{background-position:200%;}}
-
-        /* BUTTONS */
         button{
-            padding:14px 32px;border:none;border-radius:30px;
-            font-size:16px;margin:10px;cursor:pointer;font-weight:600;
+            padding:14px 32px;
+            border:none;
+            border-radius:30px;
+            font-size:16px;
+            margin:10px;
+            cursor:pointer;
+            font-weight:600;
         }
+
         .yes-btn{
             background:linear-gradient(135deg,#ff1e7a,#ff7ab6);
-            color:white;animation:pulse 1.4s infinite;
+            color:white;
         }
-        @keyframes pulse{50%{box-shadow:0 0 25px rgba(255,46,122,1);}}
 
         .buttons{position:relative;height:60px;}
         #no{position:absolute;}
 
-        img{margin-top:15px;width:100%;max-width:260px;border-radius:18px;}
-        #quizImage{display:none;margin:20px auto;}
+        #final .gift{font-size:160px;cursor:pointer;}
 
-        /* 💥 HEART BURST */
-        .burst{
-            position:absolute;
-            font-size:20px;
-            animation:burst 0.9s ease-out forwards;
-            pointer-events:none;
-        }
-        @keyframes burst{
-            from{opacity:1;transform:translate(0,0) scale(1);}
-            to{opacity:0;transform:translate(var(--x),var(--y)) scale(1.6);}
-        }
-
-        /* 💖 REACTION */
-        .reaction{
-            font-size:22px;
-            margin-top:10px;
-            animation:pop .6s ease;
-        }
-        @keyframes pop{
-            from{opacity:0;transform:scale(.6);}
-            to{opacity:1;transform:scale(1);}
-        }
-
-        /* 🔐 LOCK показатель */
-        .lock-box{
-            margin-top:20px;
-            animation:fadeIn 1s ease;
-        }
-        .lock-box button{
-            background:white;
-            color:#ff1e7a;
-        }
-
-        /* FINAL */
-        #final .gift{font-size:170px;cursor:pointer;animation:giftPulse 1.6s infinite;}
-        @keyframes giftPulse{50%{transform:scale(1.1);}}
-
-        /* LETTER */
         .letter-paper{
-            background:#fffaf0;color:#5a2a2a;padding:22px;border-radius:18px;
-            margin-top:20px;text-align:left;font-family:Georgia,serif;
+            background:rgba(255,255,255,0.9);
+            color:#5a2a2a;
+            padding:20px;
+            border-radius:18px;
+            margin-top:20px;
+            text-align:left;
+            font-family:Georgia,serif;
         }
         .cursor{display:inline-block;width:10px;background:#5a2a2a;animation:blink 1s infinite;}
         @keyframes blink{50%{opacity:0;}}
@@ -138,19 +103,13 @@
 
 <body>
 
-<div class="bg" id="bg"></div>
-
 <div class="container">
 
     <!-- SCREEN 1 -->
-    <div class="screen active fade-in" id="screen1">
-        <h2 style="font-family:'Playfair Display',serif; font-size:32px; margin-bottom:10px;">
-            HEY JANHAVI 💕
-        </h2>
+    <div class="screen active" id="screen1">
+        <h2>HEY JANHAVI 💕</h2>
         <div class="emoji">🎀</div>
-        <h1><span class="title-small">Will you be my</span><br>
-            <span class="title-big">Valentine? 💖</span></h1>
-        <p>Choose wisely… 💕</p>
+        <h1>Will you be my Valentine? 💖</h1>
         <div class="buttons">
             <button class="yes-btn" onclick="showYes()">Yes 💖</button>
             <button id="no" onmouseover="moveNo()">No 🙈</button>
@@ -158,27 +117,27 @@
     </div>
 
     <!-- SCREEN 2 -->
-    <div class="screen fade-in" id="screen2">
+    <div class="screen" id="screen2">
         <div class="emoji">🥰</div>
         <h1>You said YES 💖</h1>
         <p>My heart is officially yours 😘</p>
         <img src="love.jpg">
+        <br>
         <button onclick="startQuiz()">Start Quiz 💕</button>
     </div>
 
     <!-- QUIZ -->
-    <div class="screen fade-in" id="quiz">
+    <div class="screen" id="quiz">
         <div class="emoji">💌</div>
         <img id="quizImage">
-        <h1 id="question"></h1>
+        <h2 id="question"></h2>
         <div id="options"></div>
         <div id="reaction"></div>
         <div id="lock"></div>
     </div>
 
     <!-- FINAL -->
-    <div class="screen fade-in" id="final">
-        <div class="emoji">👩‍❤️‍👨</div>
+    <div class="screen" id="final">
         <h1>A little surprise for you 😌</h1>
         <div class="gift" onclick="openGift()">🎁</div>
         <div class="letter-paper">
@@ -189,50 +148,45 @@
 </div>
 
 <script>
-    /* HEARTS BACKGROUND */
-    const hearts=["💖","❤️","💗","💜","🤍","💝","💘","💞","💓","🩷"];
-    setInterval(()=>{
-        const h=document.createElement("div");
-        h.className="bg-heart";
-        h.innerText=hearts[Math.floor(Math.random()*hearts.length)];
-        h.style.left=Math.random()*100+"%";
-        h.style.fontSize=16+Math.random()*22+"px";
-        bg.appendChild(h);
-        setTimeout(()=>h.remove(),8000);
-    },500);
 
-    /* PIGEONS */
-    const letters=["💌","💖","❤️","💝","💓","🤍"];
-    setInterval(()=>{
-        const p=document.createElement("div");
-        p.className="pigeon "+["fly-left","fly-right","fly-top"][Math.floor(Math.random()*3)];
-        p.style.setProperty("--top",Math.random()*70+"%");
-        p.style.setProperty("--left",Math.random()*80+"%");
-        p.style.animationDuration=8+Math.random()*6+"s";
-        p.innerHTML=`<span class="bird">🕊️</span><span class="letter">${letters[Math.floor(Math.random()*letters.length)]}</span>`;
-        bg.appendChild(p);
-        setTimeout(()=>p.remove(),16000);
-    },2500);
+    /* Sparkle Cursor */
+    document.addEventListener("mousemove",e=>{
+        const s=document.createElement("div");
+        s.className="sparkle";
+        s.innerHTML="✨";
+        s.style.left=e.clientX+"px";
+        s.style.top=e.clientY+"px";
+        document.body.appendChild(s);
+        setTimeout(()=>s.remove(),800);
+    });
 
-    /* FLOW */
+    const no=document.getElementById("no");
+    const question=document.getElementById("question");
+    const options=document.getElementById("options");
+    const reaction=document.getElementById("reaction");
+    const lock=document.getElementById("lock");
+    const quizImage=document.getElementById("quizImage");
+    const text=document.getElementById("text");
+
     function showScreen(id){
         document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
         document.getElementById(id).classList.add("active");
     }
     function showYes(){showScreen("screen2");}
-    function moveNo(){no.style.left=Math.random()*220+"px";no.style.top=Math.random()*40+"px";}
+    function moveNo(){
+        no.style.left=Math.random()*200+"px";
+        no.style.top=Math.random()*40+"px";
+    }
 
-    /* QUIZ + SECRET */
+    /* FULL QUIZ WITH PHOTO */
     const quizData=[
         {q:"Who loves more? 😌",a:["You 💖","Me 😘","Both 💑"],r:"That answer made me smile 🥰"},
         {q:"Where should we travel next?",a:["Assam","Meghalaya","Konkan"],r:"Bags already packed ✈️"},
         {q:"Our perfect date? 🌸",a:["Long walk 💕","Movie 🎬","Talking 😍"],r:"Time stops with you 😌"},
-        {q:"Who gets angry first? 😜",a:["You 😝","Me 😅","Both 😂"],r:"Still cute though 😂"},
-        { q:"Who gets jealous but hides it? 😤➡️😅",a:["You","Me","Both 🙃"],r:"Haha, that’s kinda adorable 🤭"},
+        {q:"Who gets jealous but hides it? 😤➡️😅",a:["You","Me","Both 🙃"],r:"Cute though 🤭"},
         {q:"Where did we click this photo?",img:"quiz1.jpg",a:["Vanajangi","Lambasingi","Zuluk"],r:"That memory lives in my heart 💖"},
-        {q:"If I suddenly disappear for a day… 😳",a:["I’ll be chill 😌","I’ll overthink 🤯","I’ll miss you 🥺"],r:"Okay, that reaction is very telling 😌"},
-        {q:"If we stop talking for one day… 😶",a:["Peace 😌","Weird 😕","Impossible 🥺"],r:"Yeah… impossible sounds right 🥺"},
-        {q:"If we fight, who will say sorry first? 🥺",a:["You 😌","Me 🤍","We both 💞"],r:"Love always wins 🤍"}
+        {q:"If we fight, who says sorry first? 🥺",a:["You","Me","Both"],r:"Love always wins 🤍"},
+        {q:"Are we forever? 💍",a:["Yes 💖","Obviously 😘","100% 😌"],r:"That’s all I needed 💕"}
     ];
 
     let quizIndex=0;
@@ -245,67 +199,41 @@
 
     function loadQuiz(){
         if(quizIndex>=quizData.length){
-            lock.innerHTML=`
-        <div class="lock-box">
-            <p>🔐 One last thing is waiting for you…</p>
-            <button onclick="unlockFinal()">Unlock 💖</button>
-        </div>`;
+            lock.innerHTML=`<button onclick="unlockFinal()">Unlock Final 💖</button>`;
             return;
         }
-
         const q=quizData[quizIndex];
         question.innerText=q.q;
         reaction.innerHTML="";
-        lock.innerHTML="";
+        options.innerHTML="";
 
         if(q.img){
             quizImage.src=q.img;
             quizImage.style.display="block";
-        }else quizImage.style.display="none";
+        }else{
+            quizImage.style.display="none";
+        }
 
-        options.innerHTML="";
         q.a.forEach(opt=>{
             const b=document.createElement("button");
             b.innerText=opt;
-            b.onclick=(e)=>answerClicked(e,q.r);
+            b.onclick=()=>answerClicked(q.r);
             options.appendChild(b);
         });
     }
 
-    function answerClicked(e,reactionText){
-        const icons=["💖","💗","💞","❤️"];
-        for(let i=0;i<10;i++){
-            const h=document.createElement("div");
-            h.className="burst";
-            h.innerText=icons[Math.floor(Math.random()*icons.length)];
-            h.style.left=e.clientX+"px";
-            h.style.top=e.clientY+"px";
-            h.style.setProperty("--x",(Math.random()*120-60)+"px");
-            h.style.setProperty("--y",(Math.random()*-120)+"px");
-            document.body.appendChild(h);
-            setTimeout(()=>h.remove(),900);
-        }
-
-        reaction.innerHTML=`<div class="reaction">${reactionText}</div>`;
-
-        setTimeout(()=>{
-            quizIndex++;
-            loadQuiz();
-        },900);
+    function answerClicked(reactionText){
+        reaction.innerHTML=`<p>${reactionText}</p>`;
+        setTimeout(()=>{quizIndex++;loadQuiz();},1000);
     }
 
-    function unlockFinal(){
-        showScreen("final");
-    }
+    function unlockFinal(){showScreen("final");}
 
-    /* LETTER */
-    const loveText=`Janhavi Kahate 💕
+    const loveText=`Janhavi 💕
 You passed my heart’s test 😘
-
 My heart is officially yours 💖
-I’ll be right here, waiting
-for the day you tell your parents about us 🤍
-`;
+Forever & Always 🤍`;
+
     let i=0;
     function openGift(){if(i===0) typeLetter();}
     function typeLetter(){
@@ -318,4 +246,3 @@ for the day you tell your parents about us 🤍
 
 </body>
 </html>
-
